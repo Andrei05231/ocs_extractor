@@ -1,0 +1,22 @@
+#!/bin/bash
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd )"
+
+ENV_FILE="$SCRIPT_DIR/../.env"
+
+if [ -f "$ENV_FILE" ]; then
+	export $(grep -v '^#' "$ENV_FILE" | xargs)
+else 
+	echo "ERROR: .env not fount at $ENV_FILE"
+	exit 1
+fi
+
+mysql -h "$DB_HOST" -u "$DB_USER" -p"$DB_PASSWORD" -D "$DB_NAME" << 'SQL'
+INSERT INTO last_user (hardware_id, user_id)
+SELECT ID, USERID FROM hardware
+WHERE USERID IS NOT NULL AND USERID <> ''
+ON DUPLICATE KEY UPDATE 
+	user_id = VALUES(user_id),
+	last_update = CURRENT_TIMESTAMP;
+SQL
+

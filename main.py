@@ -9,9 +9,9 @@ def main():
 
     try:
         db.connect()
-        df = db.fetch_hardware_with_gpus()
+        df = db.fetch_hardware(['cpu','gpu','memory','user'])
 
-        df = apply_layout(df)
+        df = apply_layout(df,{'format_memory': False, 'reverse_gpus': False})
 
         exporter = CSVExporter()
         exporter.export(df, "ocs_custom_invetory.csv")

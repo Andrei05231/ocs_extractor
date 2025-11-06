@@ -5,5 +5,7 @@ venv/
 __pycache__/
 *.pyc
 
+cron/*.log
+
 query.bkp
 ocs_custom_invetory.csv

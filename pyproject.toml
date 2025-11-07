@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "ocs-extractor"
+version = "0.1.0"
+description = "Tool to extract custom tables from ocs_invetory"
+authors = ["Andrei05231 <carare.andrei57@gmail.com>"]
+readme = "README.md"
+package-mode = false 
+
+
+[tool.poetry.dependencies]
+python = "^3.8"
+python-dotenv = "1.0.1"
+pandas = "2.0.3"
+pymysql = "1.1.2"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+

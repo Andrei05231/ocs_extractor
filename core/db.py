@@ -34,6 +34,7 @@ class OCSDatabase:
         select_cols = [
             "h.NAME AS hardware_name",
             "b.SMODEL AS model_name",
+            "b.SSN AS serial_number",
             "h.IPADDR AS ip"
         ]
         joins = ["LEFT JOIN bios b ON b.HARDWARE_ID = h.ID"]

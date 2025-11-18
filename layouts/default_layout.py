@@ -8,6 +8,7 @@ from typing import Callable, Dict
 def format_memory_modules(df: pd.DataFrame) -> pd.DataFrame:
     """Formats memory modules like '8GB 8GB 16GB' -> '2x8GB 1x16GB'."""
     if 'memory_modules' not in df.columns:
+        print("Memory field not found.")
         return df
 
     def format_memory(mem_str):
@@ -30,6 +31,7 @@ def format_memory_modules(df: pd.DataFrame) -> pd.DataFrame:
 def reverse_gpus(df: pd.DataFrame) -> pd.DataFrame:
     """Reverses GPU order to show discrete GPUs first."""
     if 'gpus' not in df.columns:
+        print("GPU field not found.")
         return df
 
     def reverse_gpus(gpu_str):
@@ -63,6 +65,7 @@ def apply_layout(df: pd.DataFrame, enabled_filters: Dict[str, bool] = None) -> p
     # Apply only enabled filters
     for name, func in filters.items():
         if enabled_filters.get(name, False):
+            print(f"Applying filter: {name}")
             df = func(df)
 
     return df

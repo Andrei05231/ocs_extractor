@@ -74,6 +74,19 @@ class OCSDatabase:
             "user": (
                 "lu.user_id AS connected_user",
                 "LEFT JOIN last_user lu ON lu.hardware_id = h.ID"
+            ),
+            "monitor": (
+                "mon.monitor_serials, mon.monitor_captions",
+                """
+                LEFT JOIN (
+                    SELECT 
+                        HARDWARE_ID,
+                        GROUP_CONCAT(SERIAL ORDER BY ID SEPARATOR ', ') AS monitor_serials,
+                        GROUP_CONCAT(CAPTION ORDER BY ID SEPARATOR ', ') AS monitor_captions
+                    FROM monitors
+                    GROUP BY HARDWARE_ID
+                ) mon ON mon.HARDWARE_ID = h.ID
+                """
             )
         }
 

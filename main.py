@@ -9,7 +9,7 @@ def main():
 
     try:
         db.connect()
-        df = db.fetch_hardware(['cpu','gpu','memory','user'])
+        df = db.fetch_hardware(['cpu','gpu','memory','user','monitor'])
 
         df = apply_layout(df,{'format_memory': True, 'reverse_gpus': True})
 
